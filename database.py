@@ -1,13 +1,11 @@
+import os
 from pymongo import MongoClient
 
-# Replace with your MongoDB URI
-MONGO_URI = "mongodb+srv://arnel123:arnel123@cluster0.tpjir.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-client = MongoClient(MONGO_URI)
+MONGO_URI = os.getenv("MONGO_URI") or "mongodb://arnel123:arnel123@ac-xyz-shard-00-00.tpjir.mongodb.net:27017,ac-xyz-shard-00-01.tpjir.mongodb.net:27017,ac-xyz-shard-00-02.tpjir.mongodb.net:27017/?ssl=true&replicaSet=atlas-xyz-shard-0&authSource=admin&retryWrites=true&w=majority"
 
-# Create a database
+client = MongoClient(MONGO_URI)
 db = client["givify_db"]
 
-# Create a collection for users
 users_collection = db["users"]
-campaigns_collection = db["campaigns"]  # Collection name
+campaigns_collection = db["campaigns"]
 donations_collection = db["donations"]
