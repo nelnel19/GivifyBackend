@@ -7,8 +7,11 @@ from routes.donation_routes import donation_routes
 
 app = Flask(__name__)
 
-# ✅ Allow only your frontend (localhost:3000) to access
-CORS(app, resources={r"/*": {"origins": "https://givifyfrontend.onrender.com/"}})
+# ✅ Allow both local and deployed frontend URLs
+CORS(app, resources={r"/*": {"origins": [
+    "http://localhost:3000",
+    "https://givifyfrontend.onrender.com"
+]}})
 
 # JWT Secret Key
 app.config["JWT_SECRET_KEY"] = "supersecretkey"
