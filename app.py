@@ -21,8 +21,8 @@ jwt = JWTManager(app)
 
 # ✅ Register Blueprints (with proper prefixes)
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
-app.register_blueprint(campaign_routes, url_prefix="/api/campaigns")
-app.register_blueprint(donation_routes, url_prefix="/api/donations")
+app.register_blueprint(campaign_routes)
+app.register_blueprint(donation_routes)
 
 # ✅ Health check route
 @app.route("/")
