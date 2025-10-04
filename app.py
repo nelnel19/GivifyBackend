@@ -11,7 +11,7 @@ app = Flask(__name__)
 # ✅ Allow CORS from local and deployed frontend
 CORS(app, resources={r"/*": {"origins": [
     "http://localhost:3000",
-    "https://givify-o8ls.onrender.com/"
+    "https://givify-o8ls.onrender.com"
 ]}})
 
 # ✅ JWT Secret Key (for token signing)
