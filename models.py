@@ -5,13 +5,14 @@ bcrypt = Bcrypt()
 
 class UserModel:
     @staticmethod
-    def create_user(name, email, password, age):
+    def create_user(name, email, password, age, role="user"):
         hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
         user = {
             "name": name,
             "email": email.lower(),
             "password": hashed_password,
             "age": int(age),
+            "role": role,
             "disabled": False
         }
         users_collection.insert_one(user)
