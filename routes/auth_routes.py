@@ -49,12 +49,12 @@ def login():
             "id": str(user["_id"]),
             "name": user["name"],
             "email": user["email"],
-            "age": user["age"]
+            "age": user["age"],
+            "role": user.get("role", "user")  # ✅ Added role field
         }
     }), 200
 
 
-# Get all users
 # Get all users
 @auth_routes.route("/users", methods=["GET"])
 def get_users():
@@ -64,11 +64,11 @@ def get_users():
             "_id": str(user["_id"]),
             "name": user.get("name", "N/A"),
             "email": user.get("email", "N/A"),
-            "age": user.get("age", None),   # ✅ safe access
+            "age": user.get("age", None),
+            "role": user.get("role", "user"),  # ✅ Added role field
             "disabled": user.get("disabled", False)
         })
     return jsonify(users), 200
-
 
 
 # Update user
@@ -83,6 +83,8 @@ def update_user(id):
         update_fields["email"] = data["email"]
     if "age" in data:
         update_fields["age"] = int(data["age"])
+    if "role" in data:  # ✅ Added role update
+        update_fields["role"] = data["role"]
 
     users_collection.update_one({"_id": ObjectId(id)}, {"$set": update_fields})
     user = users_collection.find_one({"_id": ObjectId(id)})
@@ -92,6 +94,7 @@ def update_user(id):
         "name": user["name"],
         "email": user["email"],
         "age": user["age"],
+        "role": user.get("role", "user"),  # ✅ Added role field
         "disabled": user.get("disabled", False)
     }), 200
 
@@ -107,6 +110,7 @@ def disable_user(id):
         "name": user["name"],
         "email": user["email"],
         "age": user["age"],
+        "role": user.get("role", "user"),  # ✅ Added role field
         "disabled": True
     }), 200
 
@@ -121,6 +125,6 @@ def enable_user(id):
         "name": user["name"],
         "email": user["email"],
         "age": user.get("age", None),
+        "role": user.get("role", "user"),  # ✅ Added role field
         "disabled": False
     }), 200
-
