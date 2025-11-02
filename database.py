@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 # Replace with your MongoDB URI
-MONGO_URI = "mongodb+srv://arnel123:arnel123@cluster0.tpjir.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = "mongodb+srv://arnel123:123123123@cluster0.tpjir.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(MONGO_URI)
 
 # Create a database
